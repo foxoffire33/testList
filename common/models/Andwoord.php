@@ -32,6 +32,7 @@ class Andwoord extends ActiveRecord
     public function rules()
     {
         return [
+            [['vraag_id','text'],'required'],
             [['vraag_id'], 'integer'],
             [['created', 'updated'], 'safe'],
             [['text'], 'string', 'max' => 128],

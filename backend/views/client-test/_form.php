@@ -20,6 +20,10 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'test_id')->dropDownList(ArrayHelper::map(Test::find()->all(),'id','name')) ?>
 
     <div class="form-group">
+
+    </div>
+
+    <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

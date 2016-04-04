@@ -42,7 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <ul>
                 <?php foreach ($model->vraags as $vraag): ?>
                     <li>
-                        <string><?= $vraag->text ?></string>
+                        <strong><?= Html::a($vraag->text, ['/vraag/view', 'id' => $vraag->id]); ?></strong>
+                        <?php if (!empty($vraag->andwoords)): ?>
+                            <ul>
+                                <?php foreach ($vraag->andwoords as $andwoord): ?>
+                                    <li><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
