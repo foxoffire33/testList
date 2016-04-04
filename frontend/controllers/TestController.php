@@ -10,10 +10,11 @@ namespace frontend\controllers;
 
 use common\models\ClientTest;
 use common\models\Score;
-use common\models\search\TestSearch;
+use common\models\search\ClientTestSearch;
 use common\models\Test;
 use Yii;
 use yii\base\Model;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -21,9 +22,25 @@ use yii\web\Response;
 class TestController extends Controller
 {
 
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'json', 'create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
-        $searchModel = new TestSearch();
+        $searchModel = new ClientTestSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -50,43 +67,49 @@ class TestController extends Controller
             }
             return $returnArray;
         }
+        throw new NotFoundHttpException();
     }
 
     public function actionView($id)
     {
-        if(!empty(($model = ClientTest::findOne($id)))){
-            return $this->render('view',['model' => $model]);
+        if (!empty(($model = ClientTest::findOne($id)))) {
+            return $this->render('view', ['model' => $model]);
         }
         throw new NotFoundHttpException();
     }
 
     public function actionCreate()
     {
-        $model = new ClientTest();
         $scoreModels = [];
-
-        if (Yii::$app->request->isPost && ($count = count(Yii::$app->request->post('Score', []))) > 0) {
+        $model = new ClientTest();
+        if ($model->load(Yii::$app->request->post())) {
             $count = count(Yii::$app->request->post('Score', []));
-            $scoreModels = [new Score()];
-            for ($i = 1; $i < $count; $i++) {
+            if (count(Test::findOne($model->test_id)->vraags) != $count) {
+                $model->addError('test_id', 'Niet alle vragen zijn beandwoord');
+            }
+            for ($i = 0; $i < $count; $i++) {
                 $scoreModels[] = new Score();
             }
-            if ($model->load(['ClientTest' => Yii::$app->request->post('ClientTest')]) && Model::loadMultiple($scoreModels, Yii::$app->request->post())) {
-                $modelValidate = $model->validate();
-                $scoreModelsValidate = Model::validateMultiple($scoreModels);
-                if (($modelValidate && $scoreModelsValidate)) {
-                    $model->save(false);
-                    foreach ($scoreModels as $scoreModel) {
-                        $scoreModel->client_test_id = $model->id;
-                        $scoreModel->save(false);
-                    }
-                    $this->redirect(['/test/view', 'id' => $model->id]);
+            if ($model->validate() && Model::loadMultiple($scoreModels, Yii::$app->request->post()) && Model::validateMultiple($scoreModels)) {
+                $model->save(false);
+
+                foreach ($scoreModels as $scoreModel) {
+                    $scoreModel->client_test_id = $model->id;
+                    $scoreModel->save(false);
                 }
+                return $this->redirect(['/test/view', 'id' => $model->id]);
             }
         }
-
         return $this->render('create', ['model' => $model, 'scoreModels' => $scoreModels]);
+    }
 
+    public function actionDelete($id)
+    {
+        if (!empty(($model = ClientTest::findOne($id)))) {
+            $model->delete();
+            return $this->redirect(['index']);
+        }
+        throw new NotFoundHttpException();
     }
 
 }

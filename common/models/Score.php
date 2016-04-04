@@ -18,6 +18,9 @@ use Yii;
  */
 class Score extends ActiveRecord
 {
+    public $vraagID;
+    public $vraag;
+
     /**
      * @inheritdoc
      */
@@ -32,10 +35,16 @@ class Score extends ActiveRecord
     public function rules()
     {
         return [
+            [['andwoord_id'], 'required'],
             [['client_test_id', 'andwoord_id'], 'integer'],
-            [['created', 'updated'], 'safe'],
+            [['created', 'updated', 'vraagID','andwoord_id'], 'safe'],
             [['client_test_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientTest::className(), 'targetAttribute' => ['client_test_id' => 'id']],
         ];
+    }
+
+    public function beforeValidate()
+    {
+        return parent::beforeValidate();
     }
 
     /**
@@ -60,7 +69,8 @@ class Score extends ActiveRecord
         return $this->hasOne(ClientTest::className(), ['id' => 'client_test_id']);
     }
 
-    public function getAndwoord(){
-        return $this->hasOne(Andwoord::className(),['id' => 'andwoord_id']);
+    public function getAndwoord()
+    {
+        return $this->hasOne(Andwoord::className(), ['id' => 'andwoord_id']);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\TestSearch */
@@ -20,13 +20,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return ['id' => $model['id'], 'onclick' => 'window.location.href = \'view/?id=' . $model->id . '\';'];
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'name',
+            'client_id' => [
+                'attribute' => 'client_id',
+                'value' => function ($data) {
+                    return $data->client->name;
+                }
+            ],
+            'test_id' => [
+                'attribute' => 'test_id',
+                'value' => function ($data) {
+                    return $data->test->name;
+                }
+            ],
+            'score' => [
+                'filter' => false,
+                'header' => 'Score',
+                'value' => function ($data) {
+                    return count($data->scores);
+                }
+            ],
             'created:datetime',
-            'updated:datetime',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{delete}'
+            ],
         ],
     ]); ?>
 </div>
