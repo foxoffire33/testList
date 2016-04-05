@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Behandelaar */
 
-$this->title = 'Create Behandelaar';
+$this->title = 'Maak behandelaar';
 $this->params['breadcrumbs'][] = ['label' => 'Behandelaars', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -14,8 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?= $this->render('_form', ['model' => $model]) ?>
 
 </div>

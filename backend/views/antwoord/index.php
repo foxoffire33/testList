@@ -1,38 +1,43 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\AndwoordSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Andwoords';
+$this->title = 'Antwoorden';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="andwoord-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Andwoord', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Maak antwoord', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return ['id' => $model['id'], 'onclick' => 'window.location.href = \'view/?id=' . $model->id . '\';'];
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'text',
             'vraag_id' => [
                 'attribute' => 'vraag_id',
-                'value' => function($data){
+                'value' => function ($data) {
                     return $data->vraag->text;
                 }
             ],
             'created:datetime',
             'updated:datetime',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}{delete}'
+            ],
         ],
     ]); ?>
 </div>

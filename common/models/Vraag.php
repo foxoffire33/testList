@@ -37,6 +37,8 @@ class Vraag extends ActiveRecord
             [['created', 'updated'], 'safe'],
             [['text'], 'string', 'max' => 128],
             [['test_id'], 'exist', 'skipOnError' => true, 'targetClass' => Test::className(), 'targetAttribute' => ['test_id' => 'id']],
+            //unique
+            [['text', 'test_id'], 'unique', 'targetAttribute' => ['vraag_id', 'text']]
         ];
     }
 
@@ -59,7 +61,7 @@ class Vraag extends ActiveRecord
      */
     public function getAntwoorden()
     {
-        return $this->hasMany(Andwoord::className(), ['vraag_id' => 'id']);
+        return $this->hasMany(Antwoord::className(), ['vraag_id' => 'id']);
     }
 
     /**

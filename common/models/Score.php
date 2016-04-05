@@ -71,6 +71,6 @@ class Score extends ActiveRecord
 
     public function getAndwoord()
     {
-        return $this->hasOne(Andwoord::className(), ['id' => 'antwoord_id']);
+        return $this->hasOne(Antwoord::className(), ['id' => 'antwoord_id']);
     }
 }

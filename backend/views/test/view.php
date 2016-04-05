@@ -17,11 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Bewerk', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Verwijder', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Weet u zekker dat u dit wilt verwijderen',
                 'method' => 'post',
             ],
         ]) ?>
@@ -39,17 +39,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-sm-8">
         <h3>Vraagen</h3>
         <?php if (!empty($model->vraags)): ?>
-            <ul>
+            <ul class="list-group">
                 <?php foreach ($model->vraags as $vraag): ?>
-                    <li>
+                    <li class="list-group-item">
                         <strong><?= Html::a($vraag->text, ['/vraag/view', 'id' => $vraag->id]); ?></strong>
-                        <?php if (!empty($vraag->andwoords)): ?>
-                            <ul>
-                                <?php foreach ($vraag->andwoords as $andwoord): ?>
-                                    <li><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
+                        <div class="badge"><?= count($vraag->antwoorden) ?></div>
+                        <ul class="list-group">
+                            <?php foreach ($vraag->antwoorden as $andwoord): ?>
+                                <li class="list-group-item"><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
                     </li>
                 <?php endforeach; ?>
             </ul>

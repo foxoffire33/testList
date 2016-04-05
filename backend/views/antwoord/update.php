@@ -5,17 +5,15 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Andwoord */
 
-$this->title = 'Update Andwoord: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Andwoords', 'url' => ['index']];
+$this->title = 'Bewerk antwoord: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Antwoorden', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Bewerk';
 ?>
 <div class="andwoord-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?= $this->render('_form', ['model' => $model]) ?>
 
 </div>

@@ -16,8 +16,10 @@ use Yii;
  *
  * @property Vraag $vraag
  */
-class Andwoord extends ActiveRecord
+class Antwoord extends ActiveRecord
 {
+    public $vraag_id_virtual;
+
     /**
      * @inheritdoc
      */
@@ -32,12 +34,21 @@ class Andwoord extends ActiveRecord
     public function rules()
     {
         return [
-            [['vraag_id','text'],'required'],
+            [['vraag_id', 'text'], 'required'],
             [['vraag_id'], 'integer'],
             [['created', 'updated'], 'safe'],
             [['text'], 'string', 'max' => 128],
-            [['vraag_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vraag::className(), 'targetAttribute' => ['vraag_id' => 'id']],
+            //exists
+            ['vraag_id_virtual', 'exist', 'targetClass' => Vraag::className(), 'targetAttribute' => ['vraag_id_virtual' => 'text']],
+            //unique
+            [['vraag_id', 'text'], 'unique', 'targetAttribute' => ['vraag_id', 'text']]
         ];
+    }
+
+    public function afterValidate()
+    {
+        $this->vraag_id = Vraag::findOne(['text' => $this->vraag_id_virtual])->id;
+        parent::afterValidate();
     }
 
     /**

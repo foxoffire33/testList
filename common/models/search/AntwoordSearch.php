@@ -2,7 +2,7 @@
 
 namespace common\models\search;
 
-use common\models\Andwoord;
+use common\models\Antwoord;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -10,7 +10,7 @@ use yii\data\ActiveDataProvider;
 /**
  * AndwoordSearch represents the model behind the search form about `common\models\Andwoord`.
  */
-class AndwoordSearch extends Andwoord
+class AntwoordSearch extends Antwoord
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class AndwoordSearch extends Andwoord
      */
     public function search($params)
     {
-        $query = Andwoord::find();
+        $query = Antwoord::find();
 
         $query->joinWith('vraag');
         // add conditions that should always apply here

@@ -4,14 +4,14 @@ namespace backend\controllers;
 
 use backend\components\web\BackendController;
 use Yii;
-use common\models\Andwoord;
-use common\models\search\AndwoordSearch;
+use common\models\Antwoord;
+use common\models\search\AntwoordSearch;
 use yii\web\NotFoundHttpException;
 
 /**
  * AndwoordController implements the CRUD actions for Andwoord model.
  */
-class AndwoordController extends BackendController
+class AntwoordController extends BackendController
 {
 
     /**
@@ -20,7 +20,7 @@ class AndwoordController extends BackendController
      */
     public function actionIndex()
     {
-        $searchModel = new AndwoordSearch();
+        $searchModel = new AntwoordSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +46,7 @@ class AndwoordController extends BackendController
      */
     public function actionCreate()
     {
-        $model = new Andwoord();
+        $model = new Antwoord();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(Yii::$app->request->referrer);
@@ -98,7 +98,7 @@ class AndwoordController extends BackendController
      */
     protected function findModel($id)
     {
-        if (($model = Andwoord::findOne($id)) !== null) {
+        if (($model = Antwoord::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
