@@ -47,7 +47,9 @@ class Antwoord extends ActiveRecord
 
     public function afterValidate()
     {
-        $this->vraag_id = Vraag::findOne(['text' => $this->vraag_id_virtual])->id;
+        if (!empty($this->vraag_id_virtual)) {
+            $this->vraag_id = Vraag::findOne(['text' => $this->vraag_id_virtual])->id;
+        }
         parent::afterValidate();
     }
 
