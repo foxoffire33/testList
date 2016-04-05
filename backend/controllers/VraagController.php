@@ -2,32 +2,17 @@
 
 namespace backend\controllers;
 
+use backend\components\web\BackendController;
 use common\models\search\VraagSearch;
 use common\models\Vraag;
 use Yii;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
  * VraagController implements the CRUD actions for Vraag model.
  */
-class VraagController extends Controller
+class VraagController extends BackendController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Vraag models.

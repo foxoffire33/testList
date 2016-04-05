@@ -1,17 +1,17 @@
 <?php
 namespace frontend\controllers;
 
-use Yii;
 use common\models\LoginForm;
+use frontend\models\ContactForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use Yii;
 use yii\base\InvalidParamException;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
  * Site controller
@@ -86,7 +86,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new LoginForm(['scenario' => LoginForm::SCENARIO_FRONTEND]);
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {

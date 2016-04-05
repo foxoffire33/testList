@@ -2,32 +2,17 @@
 
 namespace backend\controllers;
 
+use backend\components\web\BackendController;
 use Yii;
 use common\models\Test;
 use common\models\search\TestSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * TestController implements the CRUD actions for Test model.
  */
-class TestController extends Controller
+class TestController extends BackendController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Test models.

@@ -2,16 +2,16 @@
 
 namespace backend\controllers;
 
+use backend\components\web\BackendController;
 use common\models\Behandelaar;
 use common\models\search\BehandelaarSearch;
 use Yii;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
  * BehandelaarController implements the CRUD actions for Behandelaar model.
  */
-class BehandelaarController extends Controller
+class BehandelaarController extends BackendController
 {
     /**
      * Lists all Behandelaar models.

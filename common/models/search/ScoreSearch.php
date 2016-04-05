@@ -18,7 +18,7 @@ class ScoreSearch extends Score
     public function rules()
     {
         return [
-            [['client_test_id', 'andwoord_id'], 'string'],
+            [['client_test_id', 'antwoord_id'], 'string'],
             [['created', 'updated'], 'safe'],
         ];
     }
@@ -66,7 +66,7 @@ class ScoreSearch extends Score
         ]);
 
         $query->andFilterWhere(['like', 'test.name', $this->client_test_id]);
-        $query->andFilterWhere(['like', 'andwoord.text', $this->andwoord_id]);
+        $query->andFilterWhere(['like', 'antwoord.text', $this->antwoord_id]);
 
         return $dataProvider;
     }

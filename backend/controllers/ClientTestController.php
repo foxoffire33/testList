@@ -2,32 +2,17 @@
 
 namespace backend\controllers;
 
+use backend\components\web\BackendController;
 use Yii;
 use common\models\ClientTest;
 use common\models\search\ClientTestSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ClientTestController implements the CRUD actions for ClientTest model.
  */
-class ClientTestController extends Controller
+class ClientTestController extends BackendController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all ClientTest models.

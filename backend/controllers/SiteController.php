@@ -1,23 +1,25 @@
 <?php
 namespace backend\controllers;
 
-use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
+use backend\components\web\BackendController;
 use common\models\LoginForm;
+use Yii;
+use yii\debug\models\search\Log;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends BackendController
 {
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-        return [
+        return ArrayHelper::merge(parent::behaviors(), [
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
@@ -38,7 +40,7 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -64,7 +66,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new LoginForm(['scenario' => LoginForm::SCENARIO_BACKEND]);
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {

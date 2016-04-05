@@ -3,18 +3,19 @@ namespace common\models;
 
 use Yii;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 /**
  * Login form
  */
 class LoginForm extends Model
 {
+    const SCENARIO_BACKEND = 'backend';
+    const SCENARIO_FRONTEND = 'frontend';
     public $username;
     public $password;
     public $rememberMe = true;
-
     private $_user;
-
 
     /**
      * @inheritdoc
@@ -29,6 +30,14 @@ class LoginForm extends Model
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
+    }
+
+    public function scenarios()
+    {
+        return ArrayHelper::merge([
+            self::SCENARIO_BACKEND => ['username', 'password', 'rememberMe', 'isAdmin'],
+            self::SCENARIO_FRONTEND => ['username', 'password', 'rememberMe']
+        ], parent::scenarios());
     }
 
     /**
@@ -49,6 +58,20 @@ class LoginForm extends Model
     }
 
     /**
+     * Finds user by [[username]]
+     *
+     * @return User|null
+     */
+    protected function getUser()
+    {
+        if ($this->_user === null) {
+            $this->_user = User::findOne(['username' => $this->username,'isAdmin' => ($this->scenario == self::SCENARIO_BACKEND)]);
+        }
+
+        return $this->_user;
+    }
+
+    /**
      * Logs in a user using the provided username and password.
      *
      * @return boolean whether the user is logged in successfully
@@ -60,19 +83,5 @@ class LoginForm extends Model
         } else {
             return false;
         }
-    }
-
-    /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
-    protected function getUser()
-    {
-        if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
-        }
-
-        return $this->_user;
     }
 }

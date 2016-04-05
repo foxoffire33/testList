@@ -2,17 +2,16 @@
 
 namespace backend\controllers;
 
+use backend\components\web\BackendController;
 use Yii;
 use common\models\Andwoord;
 use common\models\search\AndwoordSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * AndwoordController implements the CRUD actions for Andwoord model.
  */
-class AndwoordController extends Controller
+class AndwoordController extends BackendController
 {
 
     /**

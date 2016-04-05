@@ -2,32 +2,18 @@
 
 namespace backend\controllers;
 
+use backend\components\web\BackendController;
 use Yii;
 use common\models\Client;
 use common\models\search\ClientSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ClientController implements the CRUD actions for Client model.
  */
-class ClientController extends Controller
+class ClientController extends BackendController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Client models.
