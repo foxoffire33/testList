@@ -23,7 +23,7 @@ class Andwoord extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'andwoort';
+        return 'antwoord';
     }
 
     /**

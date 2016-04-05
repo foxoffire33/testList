@@ -44,9 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="col-sm-8">
     <h3>Andwoorden</h3>
-    <?php if (!empty($model->andwoords)): ?>
+    <?php if (!empty($model->antwoorden)): ?>
     <ul>
-        <?php foreach ($model->andwoords as $andwoord): ?>
+        <?php foreach ($model->antwoorden as $andwoord): ?>
             <li><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></li>
         <?php endforeach; ?>
     </ul>

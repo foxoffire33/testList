@@ -25,16 +25,16 @@ use yii\widgets\ActiveForm;
             <?php if (!empty($scoreModels)): ?>
                 <?php $count = 0; ?>
                 <?php foreach ($scoreModels as $scoreModel): ?>
-                    <tr class="<?= (!empty($scoreModel->andwoord_id) ? 'success' : 'danger') ?>">
+                    <tr class="<?= (!empty($scoreModel->antwoord) ? 'success' : 'danger') ?>">
                         <?php $vraag = \common\models\Vraag::findOne($scoreModel->vraagID); ?>
                         <td><?= $vraag->text ?></td>
                         <td>
-                            <?php if (isset($vraag->andwoords)): ?>
-                                <?php foreach ($vraag->andwoords as $andwoord): ?>
+                            <?php if (isset($vraag->antwoorden)): ?>
+                                <?php foreach ($vraag->antwoorden as $andwoord): ?>
                                     <?= Html::beginTag('label'); ?>
                                     <?= $andwoord->text ?>
                                     <?= Html::hiddenInput('Score[' . $count . '][vraagID]', $scoreModel->vraagID); ?>
-                                    <?= Html::radio('Score[' . $count . '][andwoord_id]', ($andwoord->id == $scoreModel->andwoord_id), ['value' => $andwoord->id]); ?>
+                                    <?= Html::radio('Score[' . $count . '][andwoord_id]', ($andwoord->id == $scoreModel->antwoord_id), ['value' => $andwoord->id]); ?>
                                     <?= Html::endTag('label'); ?>
                                 <?php endforeach; ?>
                             <?php endif; ?>

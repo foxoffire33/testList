@@ -59,8 +59,8 @@ class TestController extends Controller
                 $returnArray[$vraagID]['id'] = $vraag->id;
                 $returnArray[$vraagID]['text'] = $vraag->text;
                 $returnArray[$vraagID]['andwoorden'] = [];
-                if (!empty($vraag->andwoords)) {
-                    foreach ($vraag->andwoords as $andwoord) {
+                if (!empty($vraag->antwoorden)) {
+                    foreach ($vraag->antwoorden as $andwoord) {
                         $returnArray[$vraagID]['andwoorden'][] = ['id' => $andwoord->id, 'text' => $andwoord->text];
                     }
                 }

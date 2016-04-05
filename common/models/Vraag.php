@@ -57,7 +57,7 @@ class Vraag extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAndwoords()
+    public function getAntwoorden()
     {
         return $this->hasMany(Andwoord::className(), ['vraag_id' => 'id']);
     }

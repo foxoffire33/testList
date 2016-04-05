@@ -5,7 +5,7 @@ use yii\helpers\ArrayHelper;
 
 class m160404_124748_testData extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         //create users
         $this->insert('user', [
@@ -36,14 +36,13 @@ class m160404_124748_testData extends Migration
         $test = \common\models\Test::findOne(['name' => 'list 1']);
 
         $this->insert('vraag', ArrayHelper::merge([
-            'taxt' => 'lijkt blij met bezoek van familieleden',
-            'vraag_id' => $test->id,
+            'text' => 'lijkt blij met bezoek van familieleden',
         ],$this->getCreatedAndUpdated()));
 
 
     }
 
-    public function down()
+    public function safeDown()
     {
         $this->delete('user');
     }
