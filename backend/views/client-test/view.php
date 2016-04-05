@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\ClientTest */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Client Tests', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Client Testen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-test-view">

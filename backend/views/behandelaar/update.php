@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Behandelaar */
 
-$this->title = 'Bewerk behandelaar: ' . $model->id;
+$this->title = 'Bewerk behandelaar: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Behandelaars', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Bewerk';
 ?>
 <div class="behandelaar-update">

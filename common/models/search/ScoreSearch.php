@@ -43,7 +43,7 @@ class ScoreSearch extends Score
     {
         $query = Score::find();
 
-        $query->joinWith(['clientTest.test', 'andwoord']);
+        $query->joinWith(['clientTest.test', 'antwoord']);
 
         // add conditions that should always apply here
 

@@ -55,7 +55,7 @@ class Score extends ActiveRecord
         return [
             'id' => 'ID',
             'client_test_id' => 'Client Test ID',
-            'andwoord_id' => 'Andwoord ID',
+            'antwoord_id' => 'Andwoord ID',
             'created' => 'Created',
             'updated' => 'Updated',
         ];
@@ -69,7 +69,7 @@ class Score extends ActiveRecord
         return $this->hasOne(ClientTest::className(), ['id' => 'client_test_id']);
     }
 
-    public function getAndwoord()
+    public function getAntwoord()
     {
         return $this->hasOne(Antwoord::className(), ['id' => 'antwoord_id']);
     }

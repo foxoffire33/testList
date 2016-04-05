@@ -63,9 +63,9 @@ class m160404_124748_testData extends Migration
         ], $this->getCreatedAndUpdated()));
 
         //create list
-        $this->insert('test', ArrayHelper::merge(['name' => 'list 1'], $this->getCreatedAndUpdated()));
+        $this->insert('test', ArrayHelper::merge(['name' => 'GIP Testboekje'], $this->getCreatedAndUpdated()));
 
-        $testID = Test::findOne(['name' => 'list 1'])->id;
+        $testID = Test::findOne(['name' => 'GIP Testboekje'])->id;
 
         //blad 1
         $this->insert('vraag', ArrayHelper::merge(['text' => 'Lijkt blij met bezoek van familieleden', 'test_id' => $testID], $this->getCreatedAndUpdated()));

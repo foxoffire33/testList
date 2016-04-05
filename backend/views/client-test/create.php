@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\ClientTest */
 
-$this->title = 'Create Client Test';
-$this->params['breadcrumbs'][] = ['label' => 'Client Tests', 'url' => ['index']];
+$this->title = 'Maak Client Test';
+$this->params['breadcrumbs'][] = ['label' => 'Client Testen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-test-create">

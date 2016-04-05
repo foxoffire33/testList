@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\ClientTestSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Client Tests';
+$this->title = 'Client Testen';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-test-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Client Test', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Maak client Test', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

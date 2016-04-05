@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel common\models\search\ClientSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Clients';
+$this->title = 'Clienten';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Client', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Maak Client', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

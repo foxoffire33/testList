@@ -84,15 +84,11 @@ class TestController extends Controller
         $model = new ClientTest();
         if ($model->load(Yii::$app->request->post())) {
             $count = count(Yii::$app->request->post('Score', []));
-            if (count(Test::findOne($model->test_id)->vraags) != $count) {
-                $model->addError('test_id', 'Niet alle vragen zijn beandwoord');
-            }
             for ($i = 0; $i < $count; $i++) {
                 $scoreModels[] = new Score();
             }
-            if ($model->validate() && Model::loadMultiple($scoreModels, Yii::$app->request->post()) && Model::validateMultiple($scoreModels)) {
+            if ($model->validate() && Model::loadMultiple($scoreModels, ['Score' => array_values(Yii::$app->request->post('Score', []))]) && Model::validateMultiple($scoreModels)) {
                 $model->save(false);
-
                 foreach ($scoreModels as $scoreModel) {
                     $scoreModel->client_test_id = $model->id;
                     $scoreModel->save(false);

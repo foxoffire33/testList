@@ -21,29 +21,6 @@ use yii\widgets\ActiveForm;
                 <td>Andwoorden</td>
             </tr>
             </thead>
-            <tbody>
-            <?php if (!empty($scoreModels)): ?>
-                <?php $count = 0; ?>
-                <?php foreach ($scoreModels as $scoreModel): ?>
-                    <tr class="<?= (!empty($scoreModel->antwoord) ? 'success' : 'danger') ?>">
-                        <?php $vraag = \common\models\Vraag::findOne($scoreModel->vraagID); ?>
-                        <td><?= $vraag->text ?></td>
-                        <td>
-                            <?php if (isset($vraag->antwoorden)): ?>
-                                <?php foreach ($vraag->antwoorden as $andwoord): ?>
-                                    <?= Html::beginTag('label'); ?>
-                                    <?= $andwoord->text ?>
-                                    <?= Html::hiddenInput('Score[' . $count . '][vraagID]', $scoreModel->vraagID); ?>
-                                    <?= Html::radio('Score[' . $count . '][andwoord_id]', ($andwoord->id == $scoreModel->antwoord_id), ['value' => $andwoord->id]); ?>
-                                    <?= Html::endTag('label'); ?>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                            <?php $count++; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php endif; ?>
-            </tbody>
         </table>
     </div>
     <div class="row buttons">
@@ -59,6 +36,7 @@ use yii\widgets\ActiveForm;
                 url: \'/test/json\',
                 data: {id: $(this).val()},
             }).done(function(data){
+            $(\'#questionList tbody\').empty();
                 $.each(data,function(index,value){
                 var newRow = $(\'<tr />\');
                 $(\'<td />\').append(value.text).appendTo(newRow);
@@ -66,8 +44,7 @@ use yii\widgets\ActiveForm;
                         var andwoordenTemp = $(\'<td />\');
                         $.each(value.andwoorden,function(index,andwoord){
                             var label = $(\'<label />\');
-                            $(\'<input>\').attr({type: \'hidden\',name: \'Score[\'+ count +\'][vraagID]\',value: value.id}).appendTo(label);
-                            $(\'<input>\').attr({type: \'radio\',name: \'Score[\'+ count +\'][andwoord_id]\',value: andwoord.id}).appendTo(label);
+                            $(\'<input>\').attr({type: \'radio\',name: \'Score[\'+ count +\'][antwoord_id]\',value: andwoord.id}).appendTo(label);
                            $(label).prepend(andwoord.text+\'  \').appendTo(andwoordenTemp);
                         });
                         $(andwoordenTemp).appendTo(newRow);
