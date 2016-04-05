@@ -35,7 +35,7 @@ class Score extends ActiveRecord
     public function rules()
     {
         return [
-            [['antwoord_id'], 'required'],
+            [['antwoord_id', 'client_test_id'], 'required'],
             [['client_test_id', 'antwoord_id'], 'integer'],
             [['created', 'updated', 'vraagID','antwoord_id'], 'safe'],
             [['client_test_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientTest::className(), 'targetAttribute' => ['client_test_id' => 'id']],
