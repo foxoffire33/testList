@@ -35,9 +35,9 @@ class Score extends ActiveRecord
     public function rules()
     {
         return [
-            [['andwoord_id'], 'required'],
-            [['client_test_id', 'andwoord_id'], 'integer'],
-            [['created', 'updated', 'vraagID','andwoord_id'], 'safe'],
+            [['antwoord_id'], 'required'],
+            [['client_test_id', 'antwoord_id'], 'integer'],
+            [['created', 'updated', 'vraagID','antwoord_id'], 'safe'],
             [['client_test_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientTest::className(), 'targetAttribute' => ['client_test_id' => 'id']],
         ];
     }
@@ -71,6 +71,6 @@ class Score extends ActiveRecord
 
     public function getAndwoord()
     {
-        return $this->hasOne(Andwoord::className(), ['id' => 'andwoord_id']);
+        return $this->hasOne(Andwoord::className(), ['id' => 'antwoord_id']);
     }
 }
