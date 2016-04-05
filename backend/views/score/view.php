@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'client_test_id',
-            'andwoord_id',
+            'antwoord_id',
             'created',
             'updated',
         ],

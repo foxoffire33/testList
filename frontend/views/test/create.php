@@ -9,16 +9,16 @@ use yii\widgets\ActiveForm;
 <div class="col-sm-12">
     <?php $form = ActiveForm::begin(); ?>
     <div class="form-group">
-    <?= $form->field($model, 'client_id')->dropDownList(ArrayHelper::map(Client::find()->all(),'id','name'),['prompt'=>'Select...']) ?>
+    <?= $form->field($model, 'client_id')->dropDownList(ArrayHelper::map(Client::find()->all(),'id','name'),['prompt'=>'Selecteer een client...']) ?>
 
-    <?= $form->field($model, 'test_id')->dropDownList(ArrayHelper::map(Test::find()->all(),'id','name'),['prompt'=>'Select...']) ?>
+    <?= $form->field($model, 'test_id')->dropDownList(ArrayHelper::map(Test::find()->all(),'id','name'),['prompt'=>'Selecteer een test...']) ?>
     </div>
     <div id="list-group">
         <table id="questionList" class="table">
             <thead>
             <tr>
                 <td width="70%">Vraag</td>
-                <td>Andwoorden</td>
+                <td>Antwoorden</td>
             </tr>
             </thead>
         </table>

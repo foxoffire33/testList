@@ -43,7 +43,7 @@ AppAsset::register($this);
     $menuItems[] = ['label' => 'Client test', 'url' => ['/client-test']];
     $menuItems[] = ['label' => 'Client', 'url' => ['/client']];
     $menuItems[] = ['label' => 'Vraag', 'url' => ['/vraag']];
-    $menuItems[] = ['label' => 'Andwoord', 'url' => ['/andwoord']];
+    $menuItems[] = ['label' => 'Antwoord', 'url' => ['/antwoord']];
     $menuItems[] = ['label' => 'Score', 'url' => ['/score']];
 
 

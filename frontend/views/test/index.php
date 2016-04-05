@@ -36,14 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($data) {
                     return $data->test->name;
                 }
-            ],
-            'score' => [
-                'filter' => false,
-                'header' => 'Score',
-                'value' => function ($data) {
-                    return count($data->scores);
-                }
-            ],
+            ],            
             'created:datetime',
             [
                 'class' => 'yii\grid\ActionColumn',

@@ -8,10 +8,10 @@
         'attributes' => [
             'created:datetime',
             'updated:datetime',
-            'score' => [
-                'label' => 'Score',
-                'value' => count($model->scores)
-            ],
+//            'score' => [
+//                'label' => 'Score',
+//                'value' => count($model->scores)
+//            ],
         ],
     ]) ?>
     </div>

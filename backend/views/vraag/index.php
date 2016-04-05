@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel common\models\search\VraagSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Vraags';
+$this->title = 'Vragen';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vraag-index">
