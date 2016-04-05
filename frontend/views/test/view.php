@@ -20,7 +20,7 @@
             <ul class="list-group">
                 <?php foreach ($model->scores as $score): ?>
                     <li class="list-group-item">
-                        <strong><?=  $score->andwoord->vraag->text ?></strong>, <?=  $score->andwoord->text ?></li>
+                        <strong><?=  $score->antwoord->vraag->text ?></strong>, <?=  $score->antwoord->text ?></li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
