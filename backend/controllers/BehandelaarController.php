@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\components\web\BackendController;
 use common\models\Behandelaar;
 use common\models\search\BehandelaarSearch;
+use common\models\User;
 use Yii;
 use yii\web\NotFoundHttpException;
 
@@ -62,11 +63,18 @@ class BehandelaarController extends BackendController
     public function actionCreate()
     {
         $model = new Behandelaar();
+        $user = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+            if ($model->validate() && $user->validate()) {
+                $user->save(false);
+
+                $model->user_id = $user->id;
+                $model->save(false);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-        return $this->render('create', ['model' => $model]);
+        return $this->render('create', ['model' => $model, 'user' => $user]);
     }
 
     /**
@@ -78,11 +86,14 @@ class BehandelaarController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $user = $model->user;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+            if ($user->save() && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-        return $this->render('update', ['model' => $model]);
+        return $this->render('update', ['model' => $model, 'user' => $user]);
     }
 
     /**

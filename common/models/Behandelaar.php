@@ -33,7 +33,7 @@ class Behandelaar extends ActiveRecord
     public function rules()
     {
         return [
-            [['first_name','last_name','user_id'],'required'],
+            [['first_name', 'last_name'], 'required'],
             [['user_id'], 'integer'],
             [['created', 'updated'], 'safe'],
             [['first_name', 'last_name'], 'string', 'max' => 128],

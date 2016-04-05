@@ -1,7 +1,5 @@
 <?php
 
-use common\models\User;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -20,9 +18,15 @@ use yii\widgets\ActiveForm;
     <div class="col-sm-6">
         <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
     </div>
-
-    <?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->asArray()->all(), 'id', 'username')) ?>
-
+    <div class="col-sm-6">
+        <?= $form->field($user,'username')->textInput(); ?>
+     </div>
+    <div class="col-sm-6">
+        <?= $form->field($user,'password')->passwordInput(); ?>
+    </div>
+    <div class="col-sm-12">
+        <?= $form->field($user, 'email')->textInput(['type' => 'email']); ?>
+    </div>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
