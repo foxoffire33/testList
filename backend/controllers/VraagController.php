@@ -65,6 +65,7 @@ class VraagController extends BackendController
         $model = new Vraag();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Vraag is opgeslagen');
             return $this->redirect(Yii::$app->request->referrer);
         }
         return $this->render('create', ['model' => $model]);

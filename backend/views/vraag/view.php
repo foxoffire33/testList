@@ -31,10 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'text',
-            'test.name' => [
-                'attribute' => 'test.name',
+            'category.name' => [
+                'attribute' => 'category.name',
                 'format' => 'html',
-                'value' => Html::a($model->test->name, ['/test/view', 'id' => $model->test->id])
+                'value' => Html::a($model->category->name, ['/test/view', 'id' => $model->category->id])
             ],
             'created:datetime',
             'updated:datetime',

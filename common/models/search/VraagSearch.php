@@ -18,7 +18,7 @@ class VraagSearch extends Vraag
     public function rules()
     {
         return [
-            [['test_id'], 'string'],
+            [['category_id'], 'string'],
             [['text', 'created', 'updated'], 'safe'],
         ];
     }
@@ -43,7 +43,7 @@ class VraagSearch extends Vraag
     {
         $query = Vraag::find();
 
-        $query->joinWith('test');
+        $query->joinWith('category');
 
         // add conditions that should always apply here
 
@@ -67,7 +67,7 @@ class VraagSearch extends Vraag
 
         $query->andFilterWhere(['like', 'text', $this->text]);
 
-        $query->andFilterWhere(['like', 'test.name', $this->test_id]);
+        $query->andFilterWhere(['like', 'category.name', $this->category_id]);
 
         return $dataProvider;
     }

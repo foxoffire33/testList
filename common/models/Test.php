@@ -58,11 +58,9 @@ class Test extends ActiveRecord
         return $this->hasMany(ClientTest::className(), ['test_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVraags()
+    public function getCategories()
     {
-        return $this->hasMany(Vraag::className(), ['test_id' => 'id']);
+        return $this->hasMany(Category::className(), ['category_id' => 'id']);
     }
+
 }

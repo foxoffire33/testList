@@ -38,6 +38,7 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
     ];
 
+    $menuItems[] = ['label' => 'Category', 'url' => ['/category']];
     $menuItems[] = ['label' => 'Behandelaar', 'url' => ['/behandelaar']];
     $menuItems[] = ['label' => 'Test', 'url' => ['/test']];
     $menuItems[] = ['label' => 'Client test', 'url' => ['/client-test']];

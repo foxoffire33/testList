@@ -33,12 +33,12 @@ class Vraag extends ActiveRecord
     public function rules()
     {
         return [
-            [['test_id'], 'integer'],
+            [['category_id'], 'integer'],
             [['created', 'updated'], 'safe'],
             [['text'], 'string', 'max' => 128],
-            [['test_id'], 'exist', 'skipOnError' => true, 'targetClass' => Test::className(), 'targetAttribute' => ['test_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             //unique
-            [['text', 'test_id'], 'unique', 'targetAttribute' => ['vraag_id', 'text']]
+            [['text', 'category_id'], 'unique', 'targetAttribute' => ['text']]
         ];
     }
 
@@ -50,9 +50,9 @@ class Vraag extends ActiveRecord
         return [
             'id' => 'ID',
             'text' => 'Text',
-            'test_id' => 'Test ID',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'category_id' => 'Categorie',
+            'created' => 'Aangemaakt op',
+            'updated' => 'Bewerkt op',
         ];
     }
 
@@ -67,8 +67,8 @@ class Vraag extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTest()
+    public function getCategory()
     {
-        return $this->hasOne(Test::className(), ['id' => 'test_id']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 }

@@ -23,10 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'text',
-            'test_id' => [
-                'attribute' => 'test_id',
+            'category_id' => [
+                'attribute' => 'category_id',
                 'value' => function ($data) {
-                    return $data->test->name;
+                    return $data->category->name;
                 }
             ],
             'created:datetime',

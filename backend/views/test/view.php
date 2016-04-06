@@ -4,6 +4,8 @@ use common\models\Vraag;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
+use yii\helpers\ArrayHelper;
+use common\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Test */
@@ -60,6 +62,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'action' => ['/vraag/create']
         ]); ?>
         <?= $form->field(new Vraag(), 'test_id')->hiddenInput(['value' => $model->id])->label(false) ?>
+        <?= $form->field(new Vraag(), 'category_id')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', function ($data) {
+            return "{$data->name} ({$data->test->name})";
+        })) ?>
         <?= $form->field(new Vraag(), 'text')->textInput(['placeholder' => $model->getAttributeLabel('text')])->label(false); ?>
         <div class="row">
             <?= Html::submitButton('Opslaan',['class' => 'btn btn-lg btn-default col-sm-10 col-sm-offset-1']); ?>
