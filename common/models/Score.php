@@ -36,7 +36,7 @@ class Score extends ActiveRecord
         return [
             [['antwoord_id'], 'required'],//todo fixen dat ook client_test_id gezit moet zijn in de bedend
             [['client_test_id', 'antwoord_id'], 'integer'],
-            [['created', 'updated', 'vraagID','antwoord_id'], 'safe'],
+            [['created', 'updated', 'antwoord_id'], 'safe'],
             [['client_test_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientTest::className(), 'targetAttribute' => ['client_test_id' => 'id']],
         ];
     }

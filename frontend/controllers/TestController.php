@@ -57,14 +57,14 @@ class TestController extends Controller
             $returnArray = [];
             if (!empty($model->categories)) {
                 foreach ($model->categories as $categorieID => $category) {
-                    $returnArray[$categorieID]['name'] = $category->name;
-                    $returnArray[$categorieID]['vragen'] = [];
                     if (!empty($category->vragen)) {
+                        $returnArray[$categorieID]['name'] = $category->name;
+                        $returnArray[$categorieID]['vragen'] = [];
                         foreach ($category->vragen as $vraagID => $vraag) {
-                            $returnArray[$categorieID]['vragen'][$vraagID]['id'] = $vraag->id;
-                            $returnArray[$categorieID]['vragen'][$vraagID]['text'] = $vraag->text;
-                            $returnArray[$categorieID]['vragen'][$vraagID]['antwoorden'] = [];
                             if (!empty($vraag->antwoorden)) {
+                                $returnArray[$categorieID]['vragen'][$vraagID]['id'] = $vraag->id;
+                                $returnArray[$categorieID]['vragen'][$vraagID]['text'] = $vraag->text;
+                                $returnArray[$categorieID]['vragen'][$vraagID]['antwoorden'] = [];
                                 foreach ($vraag->antwoorden as $andwoord) {
                                     $returnArray[$categorieID]['vragen'][$vraagID]['antwoorden'][] = [
                                         'id' => $andwoord->id,
@@ -72,6 +72,9 @@ class TestController extends Controller
                                     ];
                                 }
                             }
+                        }
+                        if (empty($returnArray[$categorieID]['vragen'])) {
+                            unset($returnArray[$categorieID]);
                         }
                     }
                 }
