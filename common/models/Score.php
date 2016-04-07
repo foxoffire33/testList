@@ -19,7 +19,10 @@ use Yii;
 class Score extends ActiveRecord
 {
     public $vraagID;
+    //query
     public $vraag;
+    public $antwoord;
+    public $waarde;
 
     /**
      * @inheritdoc

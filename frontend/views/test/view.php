@@ -16,6 +16,9 @@
     ]) ?>
     </div>
     <div class="row">
+        <?php var_dump($model->categories);exit; ?>
+
+
         <?php if (isset($model->scores)): ?>
             <ul class="list-group">
                 <?php foreach ($model->scores as $score): ?>

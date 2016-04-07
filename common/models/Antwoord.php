@@ -34,8 +34,8 @@ class Antwoord extends ActiveRecord
     public function rules()
     {
         return [
-            [['vraag_id', 'text'], 'required'],
-            [['vraag_id'], 'integer'],
+            [['vraag_id', 'text','waarde'], 'required'],
+            [['vraag_id','waarde'], 'integer'],
             [['created', 'updated'], 'safe'],
             [['text'], 'string', 'max' => 128],
             //exists

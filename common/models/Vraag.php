@@ -33,10 +33,11 @@ class Vraag extends ActiveRecord
     public function rules()
     {
         return [
+            [['category_id', 'text'], 'required'],
             [['category_id'], 'integer'],
             [['created', 'updated'], 'safe'],
             [['text'], 'string', 'max' => 128],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
+            [['category_id'], 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             //unique
             [['text', 'category_id'], 'unique', 'targetAttribute' => ['text']]
         ];

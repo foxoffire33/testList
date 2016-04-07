@@ -20,6 +20,8 @@ class m160406_114945_addCategoriesToQuestionsAndValueToAwnser extends Migration
 
         $this->dropForeignKey('vraag_test_id', 'vraag');
 
+        $this->addColumn('antwoord','waarde','smallint');
+
         $this->delete('vraag');
 
     }
@@ -51,5 +53,6 @@ class m160406_114945_addCategoriesToQuestionsAndValueToAwnser extends Migration
 
         $this->addForeignKey('vraag_test_id', 'vraag', 'test_id', 'test', 'id', 'CASCADE', 'NO ACTION');
 
+        $this->dropColumn('antwoord','waarde');
     }
 }

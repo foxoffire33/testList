@@ -58,7 +58,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'action' => ['/antwoord/create']
     ]); ?>
     <?= $form->field(new Antwoord(), 'vraag_id')->hiddenInput(['value' => $model->id])->label(false) ?>
-    <?= $form->field(new Antwoord(), 'text')->textInput(['placeholder' => $model->getAttributeLabel('text')])->label(false); ?>
+    <div class="col-sm-8">
+        <?= $form->field(new Antwoord(), 'text')->textInput(['placeholder' => $model->getAttributeLabel('text')])->label(false); ?>
+    </div>
+    <div class="col-sm-4">
+        <?= $form->field(new Antwoord(), 'waarde')->textInput(['placeholder' => $model->getAttributeLabel('waarde')])->label(false); ?>
+    </div>
     <div class="row">
         <?= Html::submitButton('Opslaan',['class' => 'btn btn-lg btn-default col-sm-10 col-sm-offset-1']); ?>
     </div>

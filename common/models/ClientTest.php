@@ -4,6 +4,8 @@ namespace common\models;
 
 use common\components\db\ActiveRecord;
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\Query;
 
 /**
  * This is the model class for table "client_test".
@@ -56,6 +58,25 @@ class ClientTest extends ActiveRecord
         ];
     }
 
+
+    public function getAwnsers(){
+       /* $query = new Query();
+        $query->select('vraag.text as vraag,antwoord.text as antwoord,antwoord.waarde')
+            ->from('score')
+            ->leftJoin('antwoord',['antwoord.id' => 'score.antwoord_id'])
+            ->leftJoin('vraag',['vraag.id' => 'antwoord.vraag_id'])
+            ->where(['client_test_id' => $this->id]);
+       */
+
+        $query = Score::find()
+            ->select('vraag.text as vraag,antwoord.text as antwoord,antwoord.waarde')
+            ->joinWith(['antwoord','antwoord.vraag'])
+            ->where(['client_test_id' => $this->id]);
+
+
+        var_dump($query->all());exit;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -79,4 +100,10 @@ class ClientTest extends ActiveRecord
     {
         return $this->hasMany(Score::className(), ['client_test_id' => 'id']);
     }
+
+
+    public function getCategories(){
+        return $this->hasMany(Category::className(),['test_id' => 'test_id']);
+    }
+
 }
