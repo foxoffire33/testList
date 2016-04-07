@@ -55,13 +55,24 @@ class TestController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         if (!empty(($model = Test::findOne($id)))) {
             $returnArray = [];
-            foreach ($model->vraags as $vraagID => $vraag) {
-                $returnArray[$vraagID]['id'] = $vraag->id;
-                $returnArray[$vraagID]['text'] = $vraag->text;
-                $returnArray[$vraagID]['andwoorden'] = [];
-                if (!empty($vraag->antwoorden)) {
-                    foreach ($vraag->antwoorden as $andwoord) {
-                        $returnArray[$vraagID]['andwoorden'][] = ['id' => $andwoord->id, 'text' => $andwoord->text];
+            if (!empty($model->categories)) {
+                foreach ($model->categories as $categorieID => $category) {
+                    $returnArray[$categorieID]['name'] = $category->name;
+                    $returnArray[$categorieID]['vragen'] = [];
+                    if (!empty($category->vragen)) {
+                        foreach ($category->vragen as $vraagID => $vraag) {
+                            $returnArray[$categorieID]['vragen'][$vraagID]['id'] = $vraag->id;
+                            $returnArray[$categorieID]['vragen'][$vraagID]['text'] = $vraag->text;
+                            $returnArray[$categorieID]['vragen'][$vraagID]['antwoorden'] = [];
+                            if (!empty($vraag->antwoorden)) {
+                                foreach ($vraag->antwoorden as $andwoord) {
+                                    $returnArray[$categorieID]['vragen'][$vraagID]['antwoorden'][] = [
+                                        'id' => $andwoord->id,
+                                        'text' => $andwoord->text
+                                    ];
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -43,9 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if (!empty($model->categories)): ?>
             <?php foreach ($model->categories as $category): ?>
                 <h4><?= $category->name ?></h4>
-                <?php if (!empty($category->vraagen)): ?>
+                <?php if (!empty($category->vragen)): ?>
                     <ul class="list-group">
-                        <?php foreach ($category->vraagen as $vraag): ?>
+                        <?php foreach ($category->vragen as $vraag): ?>
                             <li class="list-group-item">
                                 <strong><?= Html::a($vraag->text, ['/vraag/view', 'id' => $vraag->id]); ?></strong>
                                 <div class="badge"><?= count($vraag->antwoorden) ?></div>

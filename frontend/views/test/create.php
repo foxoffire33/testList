@@ -37,22 +37,29 @@ use yii\widgets\ActiveForm;
                 data: {id: $(this).val()},
             }).done(function(data){
             $(\'#questionList tbody\').empty();
-                $.each(data,function(index,value){
-                var newRow = $(\'<tr />\');
-                $(\'<td />\').append(value.text).appendTo(newRow);
-                    if(typeof value.andwoorden != \'undefined\'){
-                        var andwoordenTemp = $(\'<td />\');
-                        $.each(value.andwoorden,function(index,andwoord){
-                            var label = $(\'<label />\');
-                            $(\'<input>\').attr({type: \'radio\',name: \'Score[\'+ count +\'][antwoord_id]\',value: andwoord.id}).appendTo(label);
-                           $(label).prepend(andwoord.text+\'  \').appendTo(andwoordenTemp);
-                        });
-                        $(andwoordenTemp).appendTo(newRow);
-                    }
-                 $(\'#questionList\').append(newRow);
-                 count++;
+                //loop categories
+                $.each(data,function(categoryID,category){
+                    //llop vragen
+                    var newthRow = $(\'<tr />\');
+                    var newCategory = $(\'<th />\').attr({colspan: \'3\'}).text(category.name).appendTo(newthRow);
+                    $(\'#questionList\').append(newthRow);
+                    console.log(newCategory);
+                     $.each(category.vragen,function(index,vraag){
+                        var newRow = $(\'<tr />\');
+                        $(\'<td />\').append(vraag.text).appendTo(newRow);
+                            if(typeof vraag.antwoorden != \'undefined\'){
+                                var andwoordenTemp = $(\'<td />\');
+                                $.each(vraag.antwoorden,function(index,antwoord){
+                                    var label = $(\'<label />\');
+                                    $(\'<input>\').attr({type: \'radio\',name: \'Score[\'+ count +\'][antwoord_id]\',value: antwoord.id}).appendTo(label);
+                                   $(label).prepend(antwoord.text+\'  \').appendTo(andwoordenTemp);
+                                });
+                                $(andwoordenTemp).appendTo(newRow);
+                            }
+                        $(\'#questionList\').append(newRow);
+                        count++;
+                     });
                 });
-
             });
         });
     });
