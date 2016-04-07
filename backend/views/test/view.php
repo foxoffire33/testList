@@ -1,11 +1,11 @@
 <?php
 
+use common\models\Category;
 use common\models\Vraag;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
-use yii\helpers\ArrayHelper;
-use common\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Test */
@@ -40,20 +40,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="col-sm-8">
         <h3>Vragen</h3>
-        <?php if (!empty($model->vraags)): ?>
-            <ul class="list-group">
-                <?php foreach ($model->vraags as $vraag): ?>
-                    <li class="list-group-item">
-                        <strong><?= Html::a($vraag->text, ['/vraag/view', 'id' => $vraag->id]); ?></strong>
-                        <div class="badge"><?= count($vraag->antwoorden) ?></div>
-                        <ul class="list-group">
-                            <?php foreach ($vraag->antwoorden as $andwoord): ?>
-                                <li class="list-group-item"><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+        <?php if (!empty($model->categories)): ?>
+            <?php foreach ($model->categories as $category): ?>
+                <h4><?= $category->name ?></h4>
+                <?php if (!empty($category->vraagen)): ?>
+                    <ul class="list-group">
+                        <?php foreach ($category->vraagen as $vraag): ?>
+                            <li class="list-group-item">
+                                <strong><?= Html::a($vraag->text, ['/vraag/view', 'id' => $vraag->id]); ?></strong>
+                                <div class="badge"><?= count($vraag->antwoorden) ?></div>
+                                <ul class="list-group">
+                                    <?php foreach ($vraag->antwoorden as $andwoord): ?>
+                                        <li class="list-group-item"><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            <?php endforeach; ?>
         <?php endif; ?>
     </div>
     <div class="col-sm-4">

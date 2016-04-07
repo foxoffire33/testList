@@ -60,7 +60,7 @@ class Test extends ActiveRecord
 
     public function getCategories()
     {
-        return $this->hasMany(Category::className(), ['category_id' => 'id']);
+        return $this->hasMany(Category::className(), ['test_id' => 'id']);
     }
 
 }
