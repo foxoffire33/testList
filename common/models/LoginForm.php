@@ -65,9 +65,14 @@ class LoginForm extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findOne(['username' => $this->username,'isAdmin' => ($this->scenario == self::SCENARIO_BACKEND)]);
+            if (!empty(($user = User::findOne(['username' => $this->username])))) {
+                if ($this->scenario == self::SCENARIO_BACKEND && $user->role == 'admin') {
+                    $this->_user = $user;
+                } elseif ($this->scenario !== self::SCENARIO_BACKEND) {
+                    $this->_user = $user;
+                }
+            }
         }
-
         return $this->_user;
     }
 

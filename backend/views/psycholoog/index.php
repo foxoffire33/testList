@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\PsycholoogSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Psycholoogs';
+$this->title = 'Psycholoogen';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="psycholoog-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Psycholoog', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Maak psycholoog', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

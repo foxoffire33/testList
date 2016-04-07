@@ -136,11 +136,15 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getRole()
     {
-        if (!Yii::$app->user->isGuest) {
-            $bhenadelaar = Behandelaar::findOne($this->id);
-            return ($bhenadelaar !== null ? 'behandelaar' : 'psycholoog');
+        if (!empty((Behandelaar::findOne(['user_id' => $this->id])))) {
+            return 'behandelaar';
+        } elseif (!empty((Psycholoog::findOne(['user_id' => $this->id])))) {
+            return 'psycholoog';
+        } elseif (!empty($this->id)) {
+            return 'admin';
+        } else {
+            return 'guest';
         }
-        return 'guest';
     }
 
     /**

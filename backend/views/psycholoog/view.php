@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Psycholoog */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Psycholoogs', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Psycholoogen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="psycholoog-view">

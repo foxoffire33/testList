@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Psycholoog */
 
-$this->title = 'Create Psycholoog';
-$this->params['breadcrumbs'][] = ['label' => 'Psycholoogs', 'url' => ['index']];
+$this->title = 'Maak psycholoog';
+$this->params['breadcrumbs'][] = ['label' => 'Psycholoogen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="psycholoog-create">
