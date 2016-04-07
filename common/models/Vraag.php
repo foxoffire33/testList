@@ -72,4 +72,5 @@ class Vraag extends ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
+
 }

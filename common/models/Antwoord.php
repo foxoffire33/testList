@@ -19,6 +19,7 @@ use Yii;
 class Antwoord extends ActiveRecord
 {
     public $vraag_id_virtual;
+    public $total;
 
     /**
      * @inheritdoc

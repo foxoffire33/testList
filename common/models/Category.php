@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "category".
@@ -33,7 +34,7 @@ class Category extends \common\components\db\ActiveRecord
             [['name', 'test_id'], 'required'],
             ['test_id', 'integer'],
             ['test_id', 'exist', 'targetClass' => Test::className(), 'targetAttribute' => 'id'],
-            [['name','test_id'],'unique','targetAttribute' => ['name','test_id']],
+            [['name', 'test_id'], 'unique', 'targetAttribute' => ['name', 'test_id']],
             [['created', 'updated'], 'safe'],
             [['name'], 'string', 'max' => 128],
         ];
@@ -53,6 +54,15 @@ class Category extends \common\components\db\ActiveRecord
         ];
     }
 
+    public function getCategoryScore()
+    {
+        $query = Antwoord::find()->select('sum(antwoord.`waarde`)/count(`antwoord`.`id`) as total')
+            ->joinWith('vraag')
+            ->where(['vraag.category_id' => $this->id])
+            ->one();
+        return round($query->total, 2);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -61,7 +71,14 @@ class Category extends \common\components\db\ActiveRecord
         return $this->hasMany(Vraag::className(), ['category_id' => 'id']);
     }
 
-    public function gettest(){
-        return $this->hasOne(Test::className(),['id' => 'test_id']);
+    public function gettest()
+    {
+        return $this->hasOne(Test::className(), ['id' => 'test_id']);
     }
+
+    public function getScores()
+    {
+        return $this->hasMany(Score::className(), ['client_test_id' => 'test_id']);
+    }
+
 }
