@@ -40,23 +40,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="col-sm-8">
         <h3>Vragen</h3>
+
+
         <?php if (!empty($model->categories)): ?>
             <?php foreach ($model->categories as $category): ?>
-                <h4><?= $category->name ?></h4>
+                <div class="list-group-item disabled"><?= $category->name ?><span
+                        class="badge pull-right"><?= count($category->vragen) ?></span></div>
                 <?php if (!empty($category->vragen)): ?>
-                    <ul class="list-group">
+                    <div class="list-group">
                         <?php foreach ($category->vragen as $vraag): ?>
-                            <li class="list-group-item">
-                                <strong><?= Html::a($vraag->text, ['/vraag/view', 'id' => $vraag->id]); ?></strong>
-                                <div class="badge"><?= count($vraag->antwoorden) ?></div>
-                                <ul class="list-group">
+                            <div class="list-group-item">
+                                <div
+                                    class="list-group-item disabled"><?= Html::a($vraag->text, ['/vraag/view', 'id' => $vraag->id]); ?>
+                                    <span class="badge pull-right"><?= count($vraag->antwoorden) ?></span></div>
+                                <div class="list-group">
                                     <?php foreach ($vraag->antwoorden as $andwoord): ?>
-                                        <li class="list-group-item"><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></li>
+                                        <div
+                                            class="list-group-item"><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></div>
                                     <?php endforeach; ?>
-                                </ul>
-                            </li>
+                                </div>
+                            </div>
                         <?php endforeach; ?>
-                    </ul>
+                    </div>
                 <?php endif; ?>
             <?php endforeach; ?>
         <?php endif; ?>
@@ -67,9 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'action' => ['/vraag/create']
         ]); ?>
         <?= $form->field(new Vraag(), 'test_id')->hiddenInput(['value' => $model->id])->label(false) ?>
-        <?= $form->field(new Vraag(), 'category_id')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', function ($data) {
-            return "{$data->name} ({$data->test->name})";
-        })) ?>
+        <?= $form->field(new Vraag(), 'category_id')->dropDownList(ArrayHelper::map(Category::find()->where(['test_id' => $model->id])->all(), 'id', 'name')) ?>
         <?= $form->field(new Vraag(), 'text')->textInput(['placeholder' => $model->getAttributeLabel('text')])->label(false); ?>
         <div class="row">
             <?= Html::submitButton('Opslaan',['class' => 'btn btn-lg btn-default col-sm-10 col-sm-offset-1']); ?>

@@ -13,16 +13,17 @@
     </div>
     <div class="row">
         <?php foreach ($model->categories as $category): ?>
-            <h4><?= $category->name ?><span class="badge pull-right"><?= $category->categoryScore ?></span></h4>
+            <div class="list-group-item disabled"><?= $category->name ?><span
+                    class="badge pull-right"><?= $category->categoryScore ?></span></div>
             <?php if (!empty($category->scores)): ?>
-                <ul class="list-group">
+                <div class="list-group">
                     <?php foreach ($category->scores as $score): ?>
-                        <li class="list-group-item">
+                        <div class="list-group-item">
                             <strong><?= $score->antwoord->vraag->text ?></strong>, <?= $score->antwoord->text ?>
                             <span class="badge pull-right"><?= $score->antwoord->waarde ?></span>
-                        </li>
+                        </div>
                     <?php endforeach; ?>
-                </ul>
+                </div>
             <?php endif; ?>
         <?php endforeach; ?>
     </div>
