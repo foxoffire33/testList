@@ -121,7 +121,6 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'email'], 'unique'],
             ['email', 'email'],
             ['password', 'safe'],
-            ['isAdmin', 'default', 'value' => false],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
@@ -133,6 +132,15 @@ class User extends ActiveRecord implements IdentityInterface
             $this->password_hash = Yii::$app->security->generatePasswordHash($this->password);
         }
         return parent::beforeSave($insert);
+    }
+
+    public function getRole()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $bhenadelaar = Behandelaar::findOne($this->id);
+            return ($bhenadelaar !== null ? 'behandelaar' : 'psycholoog');
+        }
+        return 'guest';
     }
 
     /**
