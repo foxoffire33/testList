@@ -13,14 +13,24 @@
     </div>
     <div class="row">
         <?php foreach ($model->categories as $category): ?>
-            <div class="list-group-item disabled"><?= $category->name ?><span
-                    class="badge pull-right"><?= $category->categoryScore ?></span></div>
+            <?php $category->setClientTestId($model->id); ?>
+            <div class="list-group-item disabled"><?= $category->name ?>
+                <?php if (Yii::$app->user->identity->role !== 'behandelaar'): ?>
+                    <span class="badge pull-right">
+                    <?= $category->categoryScore ?>
+                </span>
+                <?php endif; ?>
+            </div>
             <?php if (!empty($category->scores)): ?>
                 <div class="list-group">
                     <?php foreach ($category->scores as $score): ?>
                         <div class="list-group-item">
                             <strong><?= $score->antwoord->vraag->text ?></strong>, <?= $score->antwoord->text ?>
-                            <span class="badge pull-right"><?= $score->antwoord->waarde ?></span>
+                            <?php if (Yii::$app->user->identity->role !== 'behandelaar'): ?>
+                                <span class="badge pull-right">
+                                        <?= $score->antwoord->waarde ?>
+                                    </span>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </div>

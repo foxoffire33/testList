@@ -17,6 +17,8 @@ use yii\helpers\ArrayHelper;
  */
 class Category extends \common\components\db\ActiveRecord
 {
+    private $client_test_id;
+
     /**
      * @inheritdoc
      */
@@ -54,6 +56,11 @@ class Category extends \common\components\db\ActiveRecord
         ];
     }
 
+    public function setClientTestId($id)
+    {
+        $this->client_test_id = intval($id);
+    }
+
     /**
      * get all scores and count all antwoord.waarde columns
      * @return float
@@ -82,8 +89,12 @@ class Category extends \common\components\db\ActiveRecord
 
     public function getScores()
     {
-        return $this->hasMany(Score::className(), ['client_test_id' => 'test_id'])
-            ->joinWith(['antwoord.vraag'])->where(['vraag.category_id' => $this->id]);
+        return Score::find()
+            ->joinWith(['antwoord.vraag', 'clientTest'])
+            ->where([
+                'vraag.category_id' => $this->id,
+                'client_test_id' => $this->client_test_id
+            ])->all();
     }
 
 }
