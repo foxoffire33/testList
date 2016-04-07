@@ -19,9 +19,11 @@
                     <?php foreach ($category->scores as $score): ?>
                         <li class="list-group-item">
                             <strong><?= $score->antwoord->vraag->text ?></strong>, <?= $score->antwoord->text ?>
+                            <span class="badge pull-right"><?= $score->antwoord->waarde ?></span>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
         <?php endforeach; ?>
     </div>
+</div>

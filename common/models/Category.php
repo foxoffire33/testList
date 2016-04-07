@@ -54,13 +54,14 @@ class Category extends \common\components\db\ActiveRecord
         ];
     }
 
+    /**
+     * get all scores and count all antwoord.waarde columns
+     * @return float
+     */
     public function getCategoryScore()
     {
-        $query = Antwoord::find()->select('sum(antwoord.`waarde`)/count(`antwoord`.`id`) as total')
-            ->joinWith('vraag')
-            ->where(['vraag.category_id' => $this->id])
-            ->one();
-        return round($query->total, 2);
+        $scores = $this->scores;
+        return round(array_sum(ArrayHelper::getColumn($scores, 'antwoord.waarde')) / count($scores), 2);
     }
 
     /**
@@ -78,7 +79,8 @@ class Category extends \common\components\db\ActiveRecord
 
     public function getScores()
     {
-        return $this->hasMany(Score::className(), ['client_test_id' => 'test_id']);
+        return $this->hasMany(Score::className(), ['client_test_id' => 'test_id'])
+            ->joinWith(['antwoord.vraag'])->where(['vraag.category_id' => $this->id]);
     }
 
 }
