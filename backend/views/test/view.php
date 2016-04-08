@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="list-group">
                                     <?php foreach ($vraag->antwoorden as $andwoord): ?>
                                         <div
-                                            class="list-group-item"><?= Html::a($andwoord->text, ['/andwoord/view', 'id' => $andwoord->id]) ?></div>
+                                            class="list-group-item"><?= Html::a($andwoord->text, ['/antwoord/view', 'id' => $andwoord->id]) ?></div>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
