@@ -37,15 +37,21 @@ AppAsset::register($this);
 
     if (!Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
-        $menuItems[] = ['label' => 'Category', 'url' => ['/category']];
-        $menuItems[] = ['label' => 'Behandelaar', 'url' => ['/behandelaar']];
-        $menuItems[] = ['label' => 'Psycholoog', 'url' => ['/psycholoog']];
         $menuItems[] = ['label' => 'Test', 'url' => ['/test']];
         $menuItems[] = ['label' => 'Client test', 'url' => ['/client-test']];
         $menuItems[] = ['label' => 'Client', 'url' => ['/client']];
         $menuItems[] = ['label' => 'Vraag', 'url' => ['/vraag']];
         $menuItems[] = ['label' => 'Antwoord', 'url' => ['/antwoord']];
         //   $menuItems[] = ['label' => 'Score', 'url' => ['/score']];
+        $menuItems[] = ['label' => 'Category', 'url' => ['/category'], 'items' => [
+            ['label' => 'Category', 'url' => ['/category']],
+            ['label' => 'Norm', 'url' => ['/norm']],
+            ['label' => 'Norm category', 'url' => ['/norm-category']]
+        ]];
+        $menuItems[] = ['label' => 'Accounts', 'url' => ['#'], 'items' => [
+            ['label' => 'Behandelaar', 'url' => ['/behandelaar']],
+            ['label' => 'Psycholoog', 'url' => ['/psycholoog']]
+        ]];
     }
 
     if (Yii::$app->user->isGuest) {
