@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'text',
+            'waarde',
             'vraag.text',
             'created:datetime',
             'updated:datetime',
