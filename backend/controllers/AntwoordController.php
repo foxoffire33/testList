@@ -3,9 +3,9 @@
 namespace backend\controllers;
 
 use backend\components\web\BackendController;
-use Yii;
 use common\models\Antwoord;
 use common\models\search\AntwoordSearch;
+use Yii;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -40,6 +40,22 @@ class AntwoordController extends BackendController
     }
 
     /**
+     * Finds the Andwoord model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Andwoord the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Antwoord::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
      * Creates a new Andwoord model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -50,11 +66,8 @@ class AntwoordController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(Yii::$app->request->referrer);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+        return $this->render('create', ['model' => $model]);
     }
 
     /**
@@ -69,11 +82,9 @@ class AntwoordController extends BackendController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+        $model->vraag_id_virtual = (isset($model->vraag->id) ? $model->vraag->text : $model->vraag_id_virtual);
+        return $this->render('update', ['model' => $model]);
     }
 
     /**
@@ -87,21 +98,5 @@ class AntwoordController extends BackendController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Andwoord model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Andwoord the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Antwoord::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
     }
 }

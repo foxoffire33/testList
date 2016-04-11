@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'rowOptions' => function ($model, $key, $index, $grid) {
-            return ['id' => $model['id'], 'onclick' => 'window.location.href = \'view/?id=' . $model->id . '\';'];
+            return ['id' => $model['id'], 'onclick' => 'window.location.href = \'antwoord/view/?id=' . $model->id . '\';'];
         },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
