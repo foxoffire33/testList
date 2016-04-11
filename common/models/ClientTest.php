@@ -51,30 +51,11 @@ class ClientTest extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'client_id' => 'Client ID',
-            'test_id' => 'Test ID',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'client_id' => 'Client',
+            'test_id' => 'Test',
+            'created' => 'Aangemaakt op',
+            'updated' => 'Bewerkt op',
         ];
-    }
-
-
-    public function getAwnsers(){
-       /* $query = new Query();
-        $query->select('vraag.text as vraag,antwoord.text as antwoord,antwoord.waarde')
-            ->from('score')
-            ->leftJoin('antwoord',['antwoord.id' => 'score.antwoord_id'])
-            ->leftJoin('vraag',['vraag.id' => 'antwoord.vraag_id'])
-            ->where(['client_test_id' => $this->id]);
-       */
-
-        $query = Score::find()
-            ->select('vraag.text as vraag,antwoord.text as antwoord,antwoord.waarde')
-            ->joinWith(['antwoord','antwoord.vraag'])
-            ->where(['client_test_id' => $this->id]);
-
-
-        var_dump($query->all());exit;
     }
 
     /**

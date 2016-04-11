@@ -48,11 +48,11 @@ class Client extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
+            'first_name' => 'Voornaam',
+            'last_name' => 'Naam',
             'email' => 'Email',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'created' => 'Aangemaakt op',
+            'updated' => 'Bewerkt op',
         ];
     }
 

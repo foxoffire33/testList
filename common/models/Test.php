@@ -44,9 +44,9 @@ class Test extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'name' => 'Naam',
+            'created' => 'Aangemaakt op',
+            'updated' => 'Bewerkt op',
         ];
     }
 

@@ -48,11 +48,11 @@ class Behandelaar extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'user_id' => 'User ID',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'first_name' => 'Voornaam',
+            'last_name' => 'Naam',
+            'user_id' => 'Gebruiker',
+            'created' => 'Aangemaakt op',
+            'updated' => 'Bewerkt op',
         ];
     }
 

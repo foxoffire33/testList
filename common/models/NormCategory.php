@@ -65,11 +65,11 @@ class NormCategory extends \common\components\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'norm_id' => 'Norm ID',
-            'category_id' => 'Category ID',
+            'norm_id' => 'Norm',
+            'category_id' => 'Categorie',
             'score' => 'Score',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'created' => 'Aangemaakt op',
+            'updated' => 'Bewerkt op',
         ];
     }
 

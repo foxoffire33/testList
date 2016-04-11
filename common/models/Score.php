@@ -53,10 +53,10 @@ class Score extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'client_test_id' => 'Client Test ID',
-            'antwoord_id' => 'Antwoord ID',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'client_test_id' => 'Client Test',
+            'antwoord_id' => 'Antwoord',
+            'created' => 'Aangemaakt op',
+            'updated' => 'Bewerkt op',
         ];
     }
 

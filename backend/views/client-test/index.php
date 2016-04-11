@@ -14,9 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Maak client Test', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -34,9 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->test->name;
                 }
             ],
-            'created',
-            'updated',
-            ['class' => 'yii\grid\ActionColumn'],
+            'created:datetime',
+            'updated:datetime',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}{delete}',
+            ],
         ],
     ]); ?>
 </div>

@@ -62,9 +62,9 @@ class Antwoord extends ActiveRecord
         return [
             'id' => 'ID',
             'text' => 'Text',
-            'vraag_id' => 'Vraag ID',
-            'created' => 'Created',
-            'updated' => 'Updated',
+            'vraag_id' => 'Vraag',
+            'created' => 'Aangemaakt op',
+            'updated' => 'Bewerkt op',
         ];
     }
 
