@@ -97,4 +97,9 @@ class Category extends \common\components\db\ActiveRecord
             ])->all();
     }
 
+    public function getNorms()
+    {
+        return $this->hasMany(NormCategory::className(), ['category_id' => 'id']);
+    }
+
 }

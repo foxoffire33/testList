@@ -48,10 +48,11 @@ class NormCategory extends \common\components\db\ActiveRecord
     {
         $this->norm_id = Norm::findOne(['name' => $this->norm_id_virtual])->id;
         $this->category_id = Category::findOne(['name' => $this->norm_category_id_virtual])->id;
-
-        if (!empty(self::findOne(['norm_id' => $this->norm_id, 'category_id' => $this->category_id]))) {
-            $this->addError('norm_id_virtual', 'Deze norm zit al aan deze category gekopeld');
-            return false;
+        if ($this->isNewRecord) {
+            if (!empty(self::findOne(['norm_id' => $this->norm_id, 'category_id' => $this->category_id]))) {
+                $this->addError('norm_id_virtual', 'Deze norm zit al aan deze category gekopeld');
+                return false;
+            }
         }
 
         return parent::beforeSave($insert);
