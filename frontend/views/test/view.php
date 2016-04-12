@@ -1,7 +1,5 @@
 <?php
 use frontend\assetsBundels\viewTest\ViewtestAssetsBundel;
-use yii\bootstrap\Html;
-use yii\helpers\ArrayHelper;
 use yii\widgets\DetailView;
 
 $psycholoog = Yii::$app->user->identity->role == 'psycholoog';
@@ -23,7 +21,7 @@ if ($psycholoog) {
     </div>
     <div class="row">
         <?php foreach ($model->categories as $category): ?>
-            <div class="col-sm-<?= ($psycholoog ? '10' : '12') ?>">
+            <div class="col-sm-<?= ($psycholoog ? '8' : '12') ?>">
                 <?php $category->setClientTestId($model->id); ?>
                 <div class="list-group-item disabled"><?= $category->name ?>
                     <?php if (Yii::$app->user->identity->role !== 'behandelaar'): ?>
@@ -48,12 +46,18 @@ if ($psycholoog) {
                 <?php endif; ?>
             </div>
             <?php if ($psycholoog): ?>
-                <div class="col-sm-2">
-                    <?= Html::dropDownList('norm_select', [], ArrayHelper::map($category->norms, function ($model) {
-                        return strval($model->score);
-                    }, 'norm.name'), [
-                        'prompt' => '<<< Maak een keuze >>>',
-                        'id' => 'norm_select']) ?>
+                <div class="col-sm-4">
+                    <?php if (!empty($category->norms)): ?>
+                        <lu class="list-group">
+                            <?php foreach ($category->norms as $norm): ?>
+                                <li class="list-group-item"><?= $norm->norm->name ?>
+                                    <span class="badge pull-right">
+                                        <?= $norm->getFormuleResult($model->id) ?>
+                                    </span>
+                                </li>
+                            <?php endforeach; ?>
+                        </lu>
+                    <?php endif; ?>
                     <div class="row col-sm-12" style="display: none;">
                         <span id="category"><?= $category->categoryScore ?></span> - <span id="selected">0</span> =
                         <span id="total">0</span>

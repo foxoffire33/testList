@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->category->name;
                 }
             ],
-            'score',
+            'max',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

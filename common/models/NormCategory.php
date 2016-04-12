@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $norm_id
  * @property integer $category_id
- * @property double $score
+ * @property double $max
  * @property string $created
  * @property string $updated
  *
@@ -36,8 +36,8 @@ class NormCategory extends \common\components\db\ActiveRecord
     public function rules()
     {
         return [
-            [['norm_id_virtual', 'norm_category_id_virtual', 'score'], 'required'],
-            [['score'], 'number'],
+            [['norm_id_virtual', 'norm_category_id_virtual', 'max', 'formule'], 'required'],
+            [['max'], 'number'],
             [['created', 'updated', 'norm_category_id_virtual'], 'safe'],
             [['norm_category_id_virtual'], 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'name'],
             [['norm_id_virtual'], 'exist', 'targetClass' => Norm::className(), 'targetAttribute' => 'name'],
@@ -67,10 +67,19 @@ class NormCategory extends \common\components\db\ActiveRecord
             'id' => 'ID',
             'norm_id' => 'Norm',
             'category_id' => 'Categorie',
-            'score' => 'Score',
+            'max' => 'Max',
             'created' => 'Aangemaakt op',
             'updated' => 'Bewerkt op',
         ];
+    }
+
+    public function getFormuleResult($id)
+    {
+        $this->category->setClientTestId($id);
+        if (!empty($this->formule)) {
+            return eval('return ' . str_replace('{score}', $this->category->categoryScore, $this->formule) . ';');
+        }
+        return 0;
     }
 
     /**

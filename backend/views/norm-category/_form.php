@@ -16,14 +16,17 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class="col-sm-5">
+    <div class="col-sm-6">
         <?= $form->field($model, 'norm_id_virtual')->widget(Select2::classname(), ['pluginOptions' => ['data' => ArrayHelper::getColumn(Norm::find()->all(), function ($element) {return $element->name;})]]); ?>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
               <?= $form->field($model, 'norm_category_id_virtual')->widget(Select2::classname(), ['pluginOptions' => ['data' => ArrayHelper::getColumn(Category::find()->all(), function ($element) {return $element->name;})]]); ?>
     </div>
-    <div class="col-sm-2">
-        <?= $form->field($model, 'score')->textInput() ?>
+    <div class="col-sm-9">
+        <?= $form->field($model, 'formule')->textInput() ?>
+    </div>
+    <div class="col-sm-3">
+        <?= $form->field($model, 'max')->textInput() ?>
     </div>
 
     <div class="form-group">

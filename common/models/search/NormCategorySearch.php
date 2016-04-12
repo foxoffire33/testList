@@ -19,7 +19,7 @@ class NormCategorySearch extends NormCategory
     {
         return [
             [['id', 'norm_id', 'category_id'], 'integer'],
-            [['score'], 'number'],
+            [['max'], 'number'],
             [['created', 'updated'], 'safe'],
         ];
     }
@@ -63,7 +63,7 @@ class NormCategorySearch extends NormCategory
             'id' => $this->id,
             'norm_id' => $this->norm_id,
             'category_id' => $this->category_id,
-            'score' => $this->score,
+            'max' => $this->max,
             'created' => $this->created,
             'updated' => $this->updated,
         ]);
