@@ -64,10 +64,13 @@ class NormCategoryController extends BackendController
     {
         $model = new NormCategory();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->formulles = Yii::$app->request->post('formule', []);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-        return $this->render('create', ['model' => $model]);
+        return $this->render('create', ['model' => $model, 'formules' => $model->formulles]);
     }
 
     /**
@@ -80,35 +83,15 @@ class NormCategoryController extends BackendController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->formulles = Yii::$app->request->post('formule', []);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
         $model->norm_id_virtual = (isset($model->norm->name) ? $model->norm->name : $model->norm_id_virtual);
         $model->norm_category_id_virtual = (isset($model->norm->name) ? $model->category->name : $model->norm_category_id_virtual);
-        return $this->render('update', ['model' => $model]);
-    }
-
-    public function actionTest()
-    {
-        $model = new NormCategory();
-        if ($model->load(Yii::$app->request->post())) {
-            $post = Yii::$app->request->post('formulle');
-            var_dump($post);
-            $saveString = (json_encode($post));
-
-            $stringTest = '';
-
-            for ($i = 0; $i < count($post); $i++) {
-                $stringTest .= "({categoryScore} {$post[$i]['option']} {$post[$i]['value']} ? {$post[$i]['true']} : ";
-            }
-            $stringTest .= '0';
-            $stringTest .= str_repeat(')', count($post));
-
-            var_dump($saveString);
-            var_dump($stringTest);
-            exit;
-        }
-        return $this->render('_form', ['model' => $model]);
+        return $this->render('update', ['model' => $model, 'formules' => $model->formulles]);
     }
 
     /**

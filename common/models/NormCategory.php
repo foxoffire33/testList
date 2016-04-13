@@ -22,6 +22,9 @@ class NormCategory extends \common\components\db\ActiveRecord
     public $norm_id_virtual;
     public $norm_category_id_virtual;
 
+    public $formulles;
+    public $formulleOptions = ['>' => '>', '<' => '<', '==' => '=='];
+
     /**
      * @inheritdoc
      */
@@ -36,9 +39,9 @@ class NormCategory extends \common\components\db\ActiveRecord
     public function rules()
     {
         return [
-            [['norm_id_virtual', 'norm_category_id_virtual', 'max', 'formule'], 'required'],
-            [['max'], 'number'],
-            [['created', 'updated', 'norm_category_id_virtual'], 'safe'],
+            [['norm_id_virtual', 'norm_category_id_virtual', 'max', 'default'], 'required'],
+            [['max', 'default'], 'number'],
+            [['created', 'updated', 'norm_category_id_virtual', 'formule', 'formulles'], 'safe'],
             [['norm_category_id_virtual'], 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'name'],
             [['norm_id_virtual'], 'exist', 'targetClass' => Norm::className(), 'targetAttribute' => 'name'],
         ];
@@ -55,7 +58,22 @@ class NormCategory extends \common\components\db\ActiveRecord
             }
         }
 
+        $this->formule = json_encode($this->formulles);
         return parent::beforeSave($insert);
+    }
+
+    public function beforeValidate()
+    {
+        if (!empty($this->formulles)) {
+            $this->formulles = array_values($this->formulles);
+            $this->formulles = json_decode(json_encode($this->formulles));
+            foreach ($this->formulles as $key => $formulle) {
+                if (!in_array($formulle->option, $this->formulleOptions) || !$this->numberCheck($formulle->value) || !$this->numberCheck($formulle->true)) {
+                    $this->addError('max', 'formulles klopen niet');
+                }
+            }
+        }
+        return parent::beforeValidate();
     }
 
     /**
@@ -76,10 +94,35 @@ class NormCategory extends \common\components\db\ActiveRecord
     public function getFormuleResult($id)
     {
         $this->category->setClientTestId($id);
-        if (!empty($this->formule)) {
-            return eval('return ' . str_replace('{score}', $this->category->categoryScore, $this->formule) . ';');
+        if ($this->EvalFormulle !== false) {
+            $result = eval('return ' . str_replace('{score}', $this->category->categoryTotalScore, $this->EvalFormulle) . ';');
+            return (floatval($result) > floatval($this->max) ? $this->max : $result);
         }
         return 0;
+    }
+
+    public function getEvalFormulle()
+    {
+        if (!empty($this->formule)) {
+            $jsonToPhpArray = json_decode($this->formule);
+            $stringTest = '';
+            for ($i = 0; $i < count($jsonToPhpArray); $i++) {
+                $stringTest .= "({score} {$jsonToPhpArray[$i]->option} {$jsonToPhpArray[$i]->value} ? {$jsonToPhpArray[$i]->true} : ";
+            }
+            $stringTest .= $this->default;
+            $stringTest .= str_repeat(')', count($jsonToPhpArray));
+
+            return $stringTest;
+        }
+        return false;
+    }
+
+    public function afterFind()
+    {
+        if (!empty($this->formule)) {
+            $this->formulles = json_decode($this->formule);
+        }
+        return parent::afterFind();
     }
 
     /**
@@ -96,5 +139,10 @@ class NormCategory extends \common\components\db\ActiveRecord
     public function getNorm()
     {
         return $this->hasOne(Norm::className(), ['id' => 'norm_id']);
+    }
+
+    private function numberCheck($string)
+    {
+        return preg_match('/^[0-9]+$/', $string);
     }
 }

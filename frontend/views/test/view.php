@@ -9,19 +9,21 @@ if ($psycholoog) {
 ?>
 <div class="col-sm-12">
     <h1>Test: <?= $model->test->name ?></h1>
-    <h4>Client: <?= $model->client->name ?></h4>
     <div class="row">
             <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'created:datetime',
-            'updated:datetime',
+            'client_id' => [
+                'attribute' => 'client_id',
+                'value' => $model->client->name,
+            ],
         ],
     ]) ?>
     </div>
     <div class="row">
         <?php foreach ($model->categories as $category): ?>
-            <div class="col-sm-<?= ($psycholoog ? '8' : '12') ?>">
+            <div class="col-sm-<?= ($psycholoog ? '9' : '12') ?>">
                 <?php $category->setClientTestId($model->id); ?>
                 <div class="list-group-item disabled"><?= $category->name ?>
                     <?php if (Yii::$app->user->identity->role !== 'behandelaar'): ?>
@@ -46,11 +48,11 @@ if ($psycholoog) {
                 <?php endif; ?>
             </div>
             <?php if ($psycholoog): ?>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <?php if (!empty($category->norms)): ?>
-                        <lu class="list-group">
+                        <lu class="list-group-items">
                             <?php foreach ($category->norms as $norm): ?>
-                                <li class="list-group-item"><?= $norm->norm->name ?>
+                                <li class="list-group-item" style="padding:4px 7px 4px 7px"><?= $norm->norm->name ?>
                                     <span class="badge pull-right">
                                         <?= $norm->getFormuleResult($model->id) ?>
                                     </span>

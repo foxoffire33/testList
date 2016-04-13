@@ -74,6 +74,14 @@ class Category extends \common\components\db\ActiveRecord
         return 0;
     }
 
+    public function getCategoryTotalScore()
+    {
+        if (!empty($scores)) {
+            return round(array_sum(ArrayHelper::getColumn($scores, 'antwoord.waarde')), 2);
+        }
+        return 0;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

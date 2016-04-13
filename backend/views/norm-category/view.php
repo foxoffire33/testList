@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->category->name,
             ],
             'max',
-            'formule',
+            'evalFormulle',
             'created:datetime',
             'updated:datetime',
         ],
