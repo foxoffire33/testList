@@ -76,6 +76,7 @@ class Category extends \common\components\db\ActiveRecord
 
     public function getCategoryTotalScore()
     {
+        $scores = $this->scores;
         if (!empty($scores)) {
             return round(array_sum(ArrayHelper::getColumn($scores, 'antwoord.waarde')), 2);
         }

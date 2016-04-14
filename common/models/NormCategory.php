@@ -94,7 +94,7 @@ class NormCategory extends \common\components\db\ActiveRecord
     public function getFormuleResult($id)
     {
         $this->category->setClientTestId($id);
-        if ($this->EvalFormulle !== false) {
+        if ($this->evalFormulle !== false) {
             $result = eval('return ' . str_replace('{score}', $this->category->categoryTotalScore, $this->EvalFormulle) . ';');
             return (floatval($result) > floatval($this->max) ? $this->max : $result);
         }

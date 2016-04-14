@@ -60,10 +60,6 @@ if ($psycholoog) {
                             <?php endforeach; ?>
                         </lu>
                     <?php endif; ?>
-                    <div class="row col-sm-12" style="display: none;">
-                        <span id="category"><?= $category->categoryScore ?></span> - <span id="selected">0</span> =
-                        <span id="total">0</span>
-                    </div>
                 </div>
             <?php endif; ?>
         <?php endforeach; ?>
