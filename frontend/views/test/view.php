@@ -1,7 +1,7 @@
 <?php
 use frontend\assetsBundels\viewTest\ViewtestAssetsBundel;
-use yii\widgets\DetailView;
 use yii\helpers\Html;
+use yii\widgets\DetailView;
 
 $psycholoog = Yii::$app->user->identity->role == 'psycholoog';
 if ($psycholoog) {
