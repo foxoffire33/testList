@@ -18,7 +18,7 @@ class NormCategoryController extends \yii\web\Controller
                         'id' => $count,
                         'name' => $category->category->name,
                         'normScore' => $category->getFormuleResult($testID),
-                        'score' => $category->category->categoryScore,
+                        'score' => $category->category->categoryTotalScore,
                         'max' => $category->max,
                     ];
                     $dataToDisplay[$count] = $temp;
