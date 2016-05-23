@@ -1,6 +1,7 @@
 <?php
 use frontend\assetsBundels\viewTest\ViewtestAssetsBundel;
 use yii\widgets\DetailView;
+use yii\helpers\Html;
 
 $psycholoog = Yii::$app->user->identity->role == 'psycholoog';
 if ($psycholoog) {
@@ -52,11 +53,10 @@ if ($psycholoog) {
                     <?php if (!empty($category->norms)): ?>
                         <lu class="list-group-items">
                             <?php foreach ($category->norms as $norm): ?>
-                                <li class="list-group-item" style="padding:4px 7px 4px 7px"><?= $norm->norm->name ?>
-                                    <span class="badge pull-right">
-                                        <?= $norm->getFormuleResult($model->id) ?>
-                                    </span>
-                                </li>
+                                <?= Html::a($norm->norm->name . '<span class="badge pull-right">' . $norm->getFormuleResult($model->id) . '/' . $norm->max . '</span>', ['/norm-category/test-summary', 'id' => $norm->id, 'testID' => $model->id], [
+                                    'class' => 'list-group-item',
+                                    'style' => 'padding:4px 7px 4px 7px'
+                                ]) ?>
                             <?php endforeach; ?>
                         </lu>
                     <?php endif; ?>
