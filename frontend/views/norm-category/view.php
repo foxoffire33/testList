@@ -1,22 +1,18 @@
-<?php if (!empty($arrayWithData)): ?>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th><strong>GIP gedragscomponent</strong></th>
-            <th>Normscore</th>
-            <th>Score</th>
-            <th>max</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($arrayWithData as $item): ?>
-            <tr>
-                <td><?= $item['name'] ?></td>
-                <td><?= $item['normScore'] ?></td>
-                <td><?= $item['score'] ?></td>
-                <td><?= $item['max'] ?></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php endif; ?>
+<div class="row">
+    <h1><?= $model->name ?></h1>
+</div>
+<div class="row">
+    <?= yii\helpers\Html::a('Naar test',['/test/view','id' => $model->test->id],['class' => 'btn btn-success']); ?>
+</div>
+<div class="row">
+<?= yii\grid\GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'name',
+        'normScore',
+        'score',
+        'max'
+    ],
+]) ?>
+</div>
