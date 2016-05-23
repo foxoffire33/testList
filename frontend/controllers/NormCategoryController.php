@@ -6,7 +6,7 @@ use common\models\ClientTest;
 
 class NormCategoryController extends \yii\web\Controller
 {
-    public function actionTestSummary($id, $testID)
+    public function actionTestSummary($testID)
     {
         $count = 0;
         $dataToDisplay = [];
