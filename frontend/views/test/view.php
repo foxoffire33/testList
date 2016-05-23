@@ -53,7 +53,7 @@ if ($psycholoog) {
                     <?php if (!empty($category->norms)): ?>
                         <lu class="list-group-items">
                             <?php foreach ($category->norms as $norm): ?>
-                                <?= Html::a($norm->norm->name . '<span class="badge pull-right">' . $norm->getFormuleResult($model->id) . '/' . $norm->max . '</span>', ['/norm-category/test-summary', 'id' => $category->id, 'testID' => $model->id], [
+                                <?= Html::a($norm->norm->name . '<span class="badge pull-right">' . $norm->getFormuleResult($model->id) . '/' . $norm->max . '</span>', ['/norm-category/test-summary', 'id' => $norm->norm->id, 'testID' => $model->id], [
                                     'class' => 'list-group-item',
                                     'style' => 'padding:4px 7px 4px 7px'
                                 ]) ?>

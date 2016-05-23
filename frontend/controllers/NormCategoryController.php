@@ -2,8 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\models\Category;
-use common\models\ClientTest;
+use common\models\NormCategory;
 use yii\data\ArrayDataProvider;
 
 class NormCategoryController extends \yii\web\Controller
@@ -12,22 +11,22 @@ class NormCategoryController extends \yii\web\Controller
     {
         $count = 0;
         $dataToDisplay = [];
-        if (!empty(($category = Category::findOne($id)))) {
-            $category->setClientTestId($testID);
-                foreach ($category->norms as $norm) {
+        if (!empty(($categories = NormCategory::findAll(['norm_id' => $id])))) {
+            foreach ($categories as $category) {
+                $category->category->setClientTestId($testID);
                     $temp = [
                         'id' => $count,
-                        'name' => $norm->norm->name,
-                        'normScore' => $norm->getFormuleResult($testID),
-                        'score' => $category->categoryScore,
-                        'max' => $norm->max,
+                        'name' => $category->category->name,
+                        'normScore' => $category->getFormuleResult($testID),
+                        'score' => $category->category->categoryScore,
+                        'max' => $category->max,
                     ];
                     $dataToDisplay[$count] = $temp;
                     $count++;
-                }
-            $dataProvider = new ArrayDataProvider(['allModels' => $dataToDisplay]);
+            }
         }
-        return $this->render('view', ['dataProvider' => $dataProvider, 'model' => $category]);
+        $dataProvider = new ArrayDataProvider(['allModels' => $dataToDisplay]);
+        return $this->render('view', ['dataProvider' => $dataProvider, 'testID' => $testID]);
     }
 
 }
